@@ -3,6 +3,7 @@ import {
   signInCtrl,
   getMeCtrl,
   signUpCtrl,
+  signOutCtrl,
 } from "../controllers/auth.controller.js";
 import { validateJwt } from "../middlewares/validateJwt.js";
 import {
@@ -16,5 +17,6 @@ const authRouter = Router();
 authRouter.post("/sign-in", signInValidation, applyValidations, signInCtrl);
 authRouter.post("/sign-up", signUpValidation, applyValidations, signUpCtrl);
 authRouter.get("/me", validateJwt, getMeCtrl);
+authRouter.post("/logout",signOutCtrl);
 
 export { authRouter };

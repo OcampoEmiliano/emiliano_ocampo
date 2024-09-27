@@ -19,13 +19,16 @@ $form.addEventListener("submit", async (e) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+       credentials: 'include'
     },
     body: JSON.stringify(entries),
   }).then((response) => {
     if (response.ok) {
       // ! REDIRIGIR AL USUARIO A LA PÁGINA PRINCIPAL
+      window.location.href = "index.html";
     } else {
       // ! MOSTRAR UN MENSAJE DE ERROR AL USUARIO
+      throw new Error('usuario no autorizado');
     }
   });
 });
