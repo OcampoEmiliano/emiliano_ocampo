@@ -22,17 +22,34 @@ export const signInCtrl = async (req, res) => {
 };
 
 export const signUpCtrl = async (req, res) => {
+  const {email, password} = req.body;
   try {
     // ! Completar la función signUpCtrl
+    const user = createUser(email, password);
+if (!user) {
+  return res.status(500).json({ message: "error al crear usuario" });
+}
+  const token = await createJwt(user.id);
+
+  res.cookie("token", token, { httpOnly: true });
+
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-export const signOutCtrl = (_req, res) => {
+export const signOutCtrl = (req, res) => {
   try {
     // ! Completar la función signOutCtrl
+
+    req.session.destroy((err) => {
+      if (err) {
+        return res.status(500).json({ message: "Error al cerrar sesión" });
+      }
+
+      res.clearCookie("authToken");
     res.status(200).json({ message: "Sign out success" });
+    })
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
