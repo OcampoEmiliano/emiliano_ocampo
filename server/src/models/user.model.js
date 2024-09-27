@@ -12,7 +12,7 @@ export const createUser = async (user) => {
   const newUser = {
     // Generate a random id
     id: crypto.randomUUID().toString(),
-    ...user,
+    username,
     password: hashedPassword,
   };
 

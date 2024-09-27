@@ -22,10 +22,10 @@ export const signInCtrl = async (req, res) => {
 };
 
 export const signUpCtrl = async (req, res) => {
-  const {email, password} = req.body;
+  const {username, email, password} = req.body;
   try {
     // ! Completar la función signUpCtrl
-    const user = createUser(email, password);
+    const user = createUser(username ,email, password);
 if (!user) {
   return res.status(500).json({ message: "error al crear usuario" });
 }
